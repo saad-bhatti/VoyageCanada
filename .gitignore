@@ -1,0 +1,13 @@
+# OS Files
+Thumbs.db
+.DS_Store
+
+# Dependencies
+node_modules
+*.json
+
+# jshint config file
+/.jshintrc
+
+#IDE config
+.idea
