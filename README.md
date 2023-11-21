@@ -26,15 +26,14 @@ One may wonder how they can signin. Users can sign in by:
 ## Development
 
 The app build: (overall code design and be specific about the programming languages, framework, libraries and third-party api that you have used)
-- Frontend:
-  React
+- Frontend: React
 
 - Backend:
-  Express-Graphql with nodejs and express
-  Libraries used:
-     cors => handles CORS
-     jsonwebtoken => authentication purposes
-     mongoose => handles connection to external database on MongoDb Cloud
+  - Express-Graphql with nodejs and express
+  - Libraries used:
+     - cors => handles CORS
+     - jsonwebtoken => authentication purposes
+     - mongoose => handles connection to external database on MongoDb Cloud
 
 ## Deployment
 
