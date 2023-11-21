@@ -1,4 +1,4 @@
-# project-secret-society-hell 
+# VoyageCanada
 
 ## Project Description
 
@@ -35,7 +35,6 @@ The app build: (overall code design and be specific about the programming langua
      cors => handles CORS
      jsonwebtoken => authentication purposes
      mongoose => handles connection to external database on MongoDb Cloud
-     validator => 
 
 ## Deployment
 
@@ -45,10 +44,6 @@ Deployed the code on the Digital Ocean server, installed the software like docke
 
 Contribution of each team member to the project:
 
-- Saad Mohy Uddin Bhatti: Everything related to backend including graphql, monoogse, and more. Related to frontend, the api was developed by me alongside with Andy.
-
-# One more thing? 
-
-Any additional comment for with the course staff: N/A 
-
-"# project-secret-society-hell" 
+- Haowen (Andy) Chang: Development of the frontend server, including all pages, components, and visual components.
+- Saad Mohy Uddin Bhatti: Development of the backend server, including the incorporation of graphql, monoogse, and more. Futhermore, the frontend API was developed by Andy and I.
+- Awais Aziz: Deployment of the application, along with supporting development of both the frontend and backend.
