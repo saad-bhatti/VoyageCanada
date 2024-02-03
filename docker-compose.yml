@@ -1,8 +1,6 @@
-version: '3.8'
-
+version: "3.8"
 
 services:
-
   frontend:
     stdin_open: true
     environment:
@@ -14,21 +12,21 @@ services:
       - /app/node_modules
       - ./frontend:/app
 
-  nginx:
-    depends_on:
-      - api
-      - frontend
-    restart: always
-    build:
-      dockerfile: Dockerfile
-      context: ./nginx
-    ports:
-      - "80:80"
-
-  api:
+  backend:
     build:
       dockerfile: Dockerfile
       context: "./backend"
     volumes:
       - /app/node_modules
       - ./backend:/app
+
+  nginx:
+    depends_on:
+      - frontend
+      - backend
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "80:80"
