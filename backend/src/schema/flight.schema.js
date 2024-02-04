@@ -8,13 +8,12 @@ export const FlightSchema = `
   type Flight {
     _id: String!
     price: Int!
-    daysUntilFlight: Int!
-    departTime: String!
-    departLoc: String!
-    arrTime: String!
-    arrLoc: String!
     seatsLeft: Int!
+    departLocation: String!
+    arriveLocation: String!
     intraProvince: Boolean!
+    departTime: String!
+    arrivalTime: String!
   }
 `;
 
@@ -25,8 +24,11 @@ export const FlightSchema = `
  * @description Represents the GraphQL queries for interacting with the Flight type.
  */
 export const FlightQueries = `
-  getFlights : [Flight]
-  getFlightById(_id: String!) : Flight
+  getFlights(pageNum: Int!, pageSize: Int!) : [Flight!]!
+  getFlightById(flightId: String!) : Flight!
+  
+  getFlightsByLocation(location: String!) : [Flight!]!
+  getFlightsByDate(date: String!) : [Flight!]!
 `;
 
 /**

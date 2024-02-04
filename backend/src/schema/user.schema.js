@@ -26,8 +26,8 @@ export const UserSchema = `
 export const UserQueries = `
   getUserProfile : User
   
-  getCart : [Flight]
-  getHistory : [Flight]
+  getCart : [Flight!]!
+  getHistory : [Flight!]!
 `;
 
 /**
@@ -37,15 +37,15 @@ export const UserQueries = `
  * @description Represents the GraphQL mutations for interacting with the User type.
  */
 export const UserMutations = `
-  signUp(email: String!, password: String!, name: String!, contact: String!) : User
-  signIn(email: String!, password: String!) : User
-  signOut : String
-  changeEmail(newEmail: String!) : User
-  changePassword(oldPassword: String!, newPassword: String!) : User
-  changeContact(newContact: String!) : User
+  signUp(email: String!, password: String!, name: String!, contact: String!) : User!
+  signIn(email: String!, password: String!) : User!
+  signOut : String!
+  changeEmail(newEmail: String!) : User!
+  changePassword(oldPassword: String!, newPassword: String!) : User!
+  changeContact(newContact: String!) : User!
 
-  addToCart(flightId: String!) : [Flight]
-  removeFromCart(flightId: String!) : [Flight]
-  completeOrder : [Flight]
-  removeFromHistory(flightId : String!) : [Flight]
+  addToCart(flightId: String!) : [Flight!]!
+  removeFromCart(flightId: String!) : [Flight!]!
+  completeOrder : [Flight!]!
+  removeFromHistory(flightId : String!) : [Flight!]!
 `;
