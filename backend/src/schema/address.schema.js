@@ -22,8 +22,7 @@ export const AddressSchema = `
  * @description Represents the GraphQL queries for interacting with the Address type.
  */
 export const AddressQueries = `
-  getAddresses : [Address]!
-  getAddressById(_id: String!) : Address
+  getAddressById(addressId: String!) : Address
 `;
 
 /**
@@ -34,6 +33,6 @@ export const AddressQueries = `
  */
 export const AddressMutations = `
   createAddress(street: String!, city: String!, postalCode: String!, province: String!) : Address
-  updateAddress(_id: String!, street: String, city: String, postalCode: String, province: String) : Address
-  deleteAddress(_id: String!) : String
+  updateAddress(addressId: String!, street: String!, city: String!, postalCode: String!, province: String!) : Address
+  deleteAddress(addressId: String!) : String
 `;

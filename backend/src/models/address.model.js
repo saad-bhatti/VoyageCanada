@@ -22,8 +22,12 @@ const addressSchema = new Schema({
     type: String,
     required: true,
     uppercase: true,
-    minLength: [6, "{VALUE} is an invalid postal code"], // Ensure length of 6
-    maxLength: [6, "{VALUE} is an invalid postal code"],
+    validate: {
+      validator: (postalCode) => {
+        return /^[A-Z]\d[A-Z] \d[A-Z]\d$/.test(postalCode);
+      },
+      message: (props) => `${props.value} is not a valid postal code`,
+    },
   },
   province: {
     type: String,
