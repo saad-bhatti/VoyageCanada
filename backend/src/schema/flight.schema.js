@@ -7,13 +7,14 @@
 export const FlightSchema = `
   type Flight {
     _id: String!
-    price: Int!
+    airline: String!
+    flightNum: String!
+    departCity: String!
+    arriveCity: String!
+    departDate: String!
+    arriveDate: String!
+    price: Float!
     seatsLeft: Int!
-    departLocation: String!
-    arriveLocation: String!
-    intraProvince: Boolean!
-    departTime: String!
-    arrivalTime: String!
   }
 `;
 
@@ -27,7 +28,7 @@ export const FlightQueries = `
   getFlights(pageNum: Int!, pageSize: Int!) : [Flight!]!
   getFlightById(flightId: String!) : Flight!
   
-  getFlightsByLocation(location: String!) : [Flight!]!
+  getFlightsByCity(departCity: String!, arriveCity: String!) : [Flight!]!
   getFlightsByDate(date: String!) : [Flight!]!
 `;
 

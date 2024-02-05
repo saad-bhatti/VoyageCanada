@@ -12,7 +12,7 @@
   - Development of frontend API
 - **Awais Aziz:**
   - Deployment of the application
-  - Supported development of the frontend and backend
+  - Supported development of the frontend
 
 ## Tech stack
 
@@ -59,6 +59,7 @@ Explore our extensive range of booking options, featuring flights that precisely
 
 - **`src/`** - Contains the source files
 
+  - **`db/`** - Contains the code and data to initialize the database
   - **`models/`** - Contains the models for the database
   - **`resolvers/`** - Contains the resolvers for the graphql server
   - **`schema/`** - Contains the schema for the graphql server
@@ -66,6 +67,7 @@ Explore our extensive range of booking options, featuring flights that precisely
   - **`app.js`** - Initializes the express application
   - **`server.js`** - Initializes the graphql server
 
+- **`.env`** - Contains the environment variables
 - **`Dockerfile`** - Commands for building a docker image
 - **`package.json`** - Defines npm behaviors and packages
 

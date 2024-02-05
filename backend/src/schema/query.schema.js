@@ -1,5 +1,6 @@
 import { AddressQueries } from "./address.schema.js";
 import { FlightQueries } from "./flight.schema.js";
+import { TicketQueries } from "./ticket.schema.js";
 import { UserQueries } from "./user.schema.js";
 
 /**
@@ -13,5 +14,6 @@ export default `
         ${UserQueries}
         ${AddressQueries}
         ${FlightQueries}
+        ${TicketQueries}
     }
 `;

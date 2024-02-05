@@ -18,14 +18,16 @@ import { sanitizeContent } from "../utils/validateInput.js";
 const getFlights = async function (args, _context) {
   try {
     // Part 1: Sanitize and verify the inputs
-    const pageNum = sanitizeContent(args.pageNum);
-    const pageSize = sanitizeContent(args.pageSize);
-    if (page <= 0) throw new Error("Invalid page number");
+    const pageNum = args.pageNum;
+    const pageSize = args.pageSize;
+    if (pageNum <= 0) throw new Error("Invalid page number");
 
     // Part 2: Retrieve the flights on the specified page
     const flights = await FlightModel.find({})
       .limit(pageSize)
       .skip((pageNum - 1) * pageSize);
+    if (!flights.length)
+      throw new Error("No flights found on this page. Please lower the page number.");
 
     // Part 3: Prepare the data to be returned
     return flights.map((flight) => prepareFlightByObject(flight));
@@ -56,6 +58,8 @@ const getFlightById = async function (args, _context) {
     const flight = await FlightModel.findById(flightId);
     if (!flight) throw new Error("Flight not found");
 
+    console.log(prepareFlightByObject(flight));
+
     // Part 3: Prepare the data to be returned
     return prepareFlightByObject(flight);
   } catch (err) {
@@ -67,20 +71,22 @@ const getFlightById = async function (args, _context) {
  * Retrieves a list of flights based on the departure location.
  *
  * @param {Object} args - The input arguments containing the departure location.
- * @param {string} args.location - The departure location to filter flights.
+ * @param {string} args.departCity - The departure city to filter flights.
+ * @param {string} args.arriveCity - The arrival city to filter flights.
  * @param {Object} _context - The context object (unused in this function).
  *
  * @returns {Promise<Array<Flight>>} A promise that resolves to an array of flight objects.
  *
  * @throws {Error} If an error occurs during the retrieval.
  */
-const getFlightsByLocation = async function (args, _context) {
+const getFlightsByCity = async function (args, _context) {
   try {
     // Part 1: Sanitize and verify the inputs
-    const departLocation = sanitizeContent(args.location);
+    const departCity = sanitizeContent(args.departCity);
+    const arriveCity = sanitizeContent(args.arriveCity);
 
     // Part 2: Retrieve the flights
-    const flights = await FlightModel.find({ departLocation: departLocation });
+    const flights = await FlightModel.find({ departCity: departCity, arriveCity: arriveCity });
 
     // Part 3: Prepare the data to be returned
     return flights.map((flight) => prepareFlightByObject(flight));
@@ -105,14 +111,20 @@ const getFlightsByDate = async function (args, _context) {
     // Part 1: Sanitize and verify the input
     const date = sanitizeContent(args.date);
     if (!/^\d{2}-\d{2}-\d{4}$/.test(date)) {
-      throw new Error("Invalid date format. Please provide a date in the format DD-MM-YYYY.");
+      throw new Error("Invalid date format. Please provide a date in the format MM-DD-YYYY.");
     }
 
-    // Part 2: Retrieve the flights
+    // Part 2: Create the beginning and end date for the query
+    const beginningDate = new Date(date);
+    beginningDate.setHours(0, 0, 0, 0);
+    const endDate = new Date(date);
+    endDate.setHours(23, 59, 59, 999);
+
+    // Part 3: Retrieve the flights
     const flights = await FlightModel.find({
-      departTime: {
-        $gte: new Date(date + "T00:00:00Z"),
-        $lt: new Date(date + "T23:59:59Z"),
+      departDate: {
+        $gte: beginningDate,
+        $lt: endDate,
       },
     });
 
@@ -127,6 +139,6 @@ const getFlightsByDate = async function (args, _context) {
 export default {
   getFlights,
   getFlightById,
-  getFlightsByLocation,
+  getFlightsByCity,
   getFlightsByDate,
 };

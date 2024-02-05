@@ -5,22 +5,24 @@ import { Schema, model } from "mongoose";
  *
  * @typedef {import("mongoose").Schema} FlightSchema
  *
- * @property {number} price - The price of the flight (required).
- * @property {string} departLocation - The departure location of the flight (required).
- * @property {string} arrivalLocation - The arrival location of the flight (required).
- * @property {Date} departTime - The departure time of the flight (required).
- * @property {Date} arrivalTime - The arrival time of the flight (required).
- * @property {number} seatsLeft - The number of seats left for the flight (required).
- * @property {boolean} intraProvince - If the flight is within the same province (required).
+ * @property {string} airline - The airline of the flight (required).
+ * @property {string} flightNum - The flight number of the flight (required).
+ * @property {string} departCity - The departure city of the flight (required).
+ * @property {string} arriveCity - The arrival city of the flight (required).
+ * @property {Date} departDate - The departure time of the flight (required).
+ * @property {Date} arriveDate - The arrival time of the flight (required).
+ * @property {number} price - The price of the flight ticket (required).
+ * @property {number} seatsLeft - The number of seats left on the flight (required).
  */
 const flightSchema = new Schema({
+  airline: { type: String, required: true },
+  flightNum: { type: String, required: true },
+  departCity: { type: String, required: true },
+  arriveCity: { type: String, required: true },
+  departDate: { type: Date, required: true },
+  arriveDate: { type: Date, required: true },
   price: { type: Number, required: true },
   seatsLeft: { type: Number, required: true },
-  departLocation: { type: String, required: true },
-  arrivalLocation: { type: String, required: true },
-  intraProvince: { type: Boolean, required: true },
-  departTime: { type: Date, required: true },
-  arrivalTime: { type: Date, required: true },
 });
 
 export default model("Flight", flightSchema);

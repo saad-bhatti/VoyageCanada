@@ -1,5 +1,7 @@
 import { compare, hash } from "bcrypt";
 import jwt from "jsonwebtoken";
+import { isValidObjectId } from "mongoose";
+import FlightModel from "../models/flight.model.js";
 import TokenModel from "../models/token.model.js";
 import UserModel from "../models/user.model.js";
 import { prepareUserByObject } from "../utils/prepareInfo.js";
@@ -80,7 +82,6 @@ const signIn = async (args, context) => {
 /**
  * Signs the authenticated client out from their account.
  *
- * @function
  * @param {Object} _args - Unused parameters.
  * @param {Object} context - The context object containing information about the request & response.
  *
@@ -109,8 +110,6 @@ const signOut = async (_args, context) => {
 /**
  * Creates and returns a new user based on the provided inputs.
  *
- * @async
- * @function
  * @param {Object} args - The input arguments containing user data.
  * @param {Object} args.userInput - The user input data.
  * @param {string} args.email - The email address of the user.
@@ -119,7 +118,7 @@ const signOut = async (_args, context) => {
  * @param {string} args.contact - The contact information of the new user.
  * @param {Object} context - The context object containing information about the request & response.
  *
- * @returns {Promise<Object>} A promise that resolves to the prepared newly created user object.
+ * @returns {Promise<User>} A promise that resolves to the prepared newly created user object.
  *
  * @throws {Error} If the inputs are invalid, the user with the provided email already exists,
  * or if there's an error during user creation.
@@ -142,27 +141,25 @@ const signUp = async (args, context) => {
 
     // Part 3: Create the new user
     const hashedPassword = await hash(rawPassword, 10);
-    const newUser = new UserModel({
+    const newUser = await UserModel.create({
       email: email,
       password: hashedPassword,
       name: name,
       contact: contact,
     });
-    const savedUser = await newUser.save();
 
     // Part 4: Create token with user's id and store it in the database
-    const token = jwt.sign({ id: user.id }, env.SECRET, { expiresIn: "2h" });
-    const newToken = new TokenModel({
+    const token = jwt.sign({ id: newUser.id }, env.SECRET, { expiresIn: "2h" });
+    await TokenModel.create({
       token: token,
       expiresIn: new Date(Date.now() + 2 * 60 * 60 * 1000),
     });
-    await newToken.save();
 
     // Part 5: Store token in response cookies
     context.res.cookie("Authorization", token, { httpOnly: true });
 
     // Part 6: Prepare and return the user
-    return prepareUserByObject(savedUser);
+    return prepareUserByObject(newUser);
   } catch (err) {
     throw err; // Throw error for graphql to handle
   }
@@ -177,7 +174,7 @@ const signUp = async (args, context) => {
  * @param {string} args.newEmail - The new email address for the user.
  * @param {Object} context - The context object containing information about the request & response.
  *
- * @returns {Promise<Object>} A promise that resolves to the prepared updated user object.
+ * @returns {Promise<User>} A promise that resolves to the prepared updated user object.
  *
  * @throws {Error} If the client is not authenticated, the new email is invalid, or
  * if a user with the new email already exists.
@@ -212,14 +209,12 @@ const changeEmail = async (args, context) => {
 /**
  * Updates the password of an existing user, given the relevant input.
  *
- * @async
- * @function
  * @param {Object} args - The input arguments containing the old and new passwords.
  * @param {string} args.oldPassword - The old password for authentication.
  * @param {string} args.newPassword - The new password to be set for the user.
  * @param {Object} context - The context object containing information about the request & response.
  *
- * @returns {Promise<Object>} A promise that resolves to the prepared updated user object.
+ * @returns {Promise<User>} A promise that resolves to the prepared updated user object.
  *
  * @throws {Error} If the client is not authenticated, the old password is incorrect, the user does
  * not exist, or if the new password is invalid.
@@ -260,13 +255,11 @@ const changePassword = async (args, context) => {
 /**
  * Updates the contact information of an existing user, given the relevant input.
  *
- * @async
- * @function
  * @param {Object} args - The input arguments containing the new contact information.
  * @param {string} args.newContact - The new contact information to be set for the user.
  * @param {Object} context - The context object containing information about the request & response.
  *
- * @returns {Promise<Object>} A promise that resolves to the prepared updated user object.
+ * @returns {Promise<User>} A promise that resolves to the prepared updated user object.
  *
  * @throws {Error} If the client is not authenticated, or if the new contact information is invalid.
  */
@@ -293,6 +286,55 @@ const changeContact = async (args, context) => {
   }
 };
 
+/**
+ * Toggles the flight in the user's cart, given the relevant input.
+ *
+ * @param {Object} args - The input arguments containing the flight ID.
+ * @param {string} args.flightId - The ID of the flight to be toggled in the user's cart.
+ * @param {Object} context - The context object containing information about the request & response.
+ *
+ * @returns {Promise<User>} A promise that resolves to the prepared updated user object.
+ *
+ * @throws {Error} If the client is not authenticated, the flight ID is invalid, or there's an error
+ * during the toggle operation.
+ */
+const toggleFlightInCart = async (args, context) => {
+  try {
+    // Ensure the client is authenticated
+    const userId = await Validator.isAuthenticated(context.req.id, context.req.token);
+
+    // Part 1: Sanitation & Validation of the input
+    const flightId = Validator.sanitizeContent(args.flightId);
+    if (!isValidObjectId(flightId)) throw new Error(`Invalid flight id ${flightId} provided.`);
+
+    // Part 2: Search for the flight with the specified ID
+    const flight = await FlightModel.findById(flightId);
+    if (!flight) throw new Error("Flight not found.");
+
+    // Part 3: Retrieve the user
+    const user = await UserModel.findById(userId);
+    if (!user) throw new Error("User does not exist.");
+
+    // Part 4: Toggle the flight in the user's cart
+    const index = user.cart.findIndex(
+      (traversalFlightId) => traversalFlightId.toString() == flightId
+    );
+    // Add the flight to the cart
+    if (index === -1) {
+      if (flight.seatsLeft === 0) throw new Error("No seats available for the flight.");
+      user.cart.push(flightId);
+    }
+    // Remove the flight from the cart
+    else user.cart.splice(index, 1);
+
+    // Part 5: Update and return the user
+    const updatedUser = await user.save();
+    return prepareUserByObject(updatedUser);
+  } catch (err) {
+    throw err; // Throw error for graphql to handle
+  }
+};
+
 /* User-related resolvers. */
 export default {
   getUserProfile,
@@ -302,4 +344,5 @@ export default {
   changeEmail,
   changePassword,
   changeContact,
+  toggleFlightInCart,
 };

@@ -1,5 +1,6 @@
 import { AddressMutations } from "./address.schema.js";
 import { FlightMutations } from "./flight.schema.js";
+import { TicketMutations } from "./ticket.schema.js";
 import { UserMutations } from "./user.schema.js";
 
 /**
@@ -13,5 +14,6 @@ export default `
         ${UserMutations}
         ${AddressMutations}
         ${FlightMutations}
+        ${TicketMutations}
     }
 `;

@@ -11,9 +11,9 @@ export const UserSchema = `
     password: String
     name: String!
     contact: String
-    addresses: [Address!]
-    cart: [Flight]!
-    history: [Flight]!
+    addresses: [Address!]!
+    cart: [Flight!]!
+    purchases: [Ticket!]!
   }
 `;
 
@@ -25,9 +25,6 @@ export const UserSchema = `
  */
 export const UserQueries = `
   getUserProfile : User
-  
-  getCart : [Flight!]!
-  getHistory : [Flight!]!
 `;
 
 /**
@@ -44,8 +41,5 @@ export const UserMutations = `
   changePassword(oldPassword: String!, newPassword: String!) : User!
   changeContact(newContact: String!) : User!
 
-  addToCart(flightId: String!) : [Flight!]!
-  removeFromCart(flightId: String!) : [Flight!]!
-  completeOrder : [Flight!]!
-  removeFromHistory(flightId : String!) : [Flight!]!
+  toggleFlightInCart(flightId: String!) : User!
 `;
