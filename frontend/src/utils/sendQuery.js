@@ -19,7 +19,7 @@ export async function sendQuery(query) {
   };
 
   // Part 2: Send the request
-  const response = await fetch("http://localhost:4000/graphql", requestInit);
+  const response = await fetch(process.env.REACT_APP_API_URL, requestInit);
   const responseBody = await response.json();
 
   // Part 3: Handle the response

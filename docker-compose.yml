@@ -1,16 +1,16 @@
 version: "3.8"
 
 services:
-  # frontend:
-  #   stdin_open: true
-  #   environment:
-  #     - CHOKIDAR_USEPOLLING=true
-  #   build:
-  #     dockerfile: Dockerfile
-  #     context: ./frontend
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./frontend:/app
+  frontend:
+    build: ./frontend
+    container_name: voyage_canada_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
 
   backend:
     build: ./backend
