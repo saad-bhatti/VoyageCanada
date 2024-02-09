@@ -4,6 +4,7 @@ import GetFlights from "./GetFlights.Endpoint";
 import GetFlightsByCity from "./GetFlightsByCity.Endpoint";
 import GetFlightsByDate from "./GetFlightsByDate.Endpoint";
 
+/** FlightEndpoints component. */
 function FlightEndpoints() {
   return (
     <CustomTab

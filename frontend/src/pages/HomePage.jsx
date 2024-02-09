@@ -1,3 +1,4 @@
+import Credits from "../components/credits/Credits";
 import FlightEndpoints from "../components/flight/FlightEndpoints";
 import CustomTab from "../components/tab/CustomTab";
 import UserEndpoints from "../components/user/UserEndpoints";
@@ -24,7 +25,7 @@ function HomePage() {
         "Address endpoints",
         <FlightEndpoints />,
         "Ticket endpoints",
-        "Credits",
+        <Credits />,
       ]}
       isVertical={false}
     />

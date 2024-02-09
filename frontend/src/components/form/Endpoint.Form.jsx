@@ -20,6 +20,10 @@ EndpointForm.propTypes = {
 
 /**
  * EndpointForm component.
+ * @param {string} props.aboutQuery
+ * @param {React.ReactNode[]} props.inputs
+ * @param {Object} props.queryResponse
+ * @param {Function} props.handleSubmit
  * @returns {React.ReactNode} EndpointForm component.
  */
 function EndpointForm(props) {

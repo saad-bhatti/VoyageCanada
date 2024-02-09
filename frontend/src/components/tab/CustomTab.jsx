@@ -5,7 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import SwipeableViews from "react-swipeable-views-react-18-fix";
-import CustomTabPanel from "./CustomTabPanels";
+import CustomTabPanel from "./CustomTabPanel";
 
 /**
  * CustomTab propTypes.

@@ -57,9 +57,7 @@ const getFlightById = async function (args, _context) {
     // Part 2: Retrieve the flight
     const flight = await FlightModel.findById(flightId);
     if (!flight) throw new Error("Flight not found");
-
-    console.log(prepareFlightByObject(flight));
-
+    
     // Part 3: Prepare the data to be returned
     return prepareFlightByObject(flight);
   } catch (err) {

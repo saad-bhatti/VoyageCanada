@@ -1,8 +1,9 @@
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { getFlightsByCity } from "../../network/flight.api";
-import EndpointForm from "../form/Endpoint.Form";
+import EndpointTabPanel from "../tab/EndpointTabPanel";
 
+/** GetFlightsByCity component. */
 function GetFlightsByCity() {
   /* About query section description. */
   const aboutQuery =
@@ -38,27 +39,12 @@ function GetFlightsByCity() {
     />,
   ];
 
-  /* Query response state. */
-  const [queryResponse, setQueryResponse] = useState({ text: "", isError: false });
-
   /** Function to handle submission. */
-  async function handleSubmit() {
-    try {
-      const response = await getFlightsByCity(departCity, arriveCity);
-      setQueryResponse({ text: JSON.stringify(response, null, 2), isError: false });
-    } catch (error) {
-      setQueryResponse({ text: error.message, isError: true });
-    }
+  async function apiFunction() {
+    return await getFlightsByCity(departCity, arriveCity);
   }
 
-  return (
-    <EndpointForm
-      aboutQuery={aboutQuery}
-      inputs={inputs}
-      queryResponse={queryResponse}
-      handleSubmit={handleSubmit}
-    />
-  );
+  return <EndpointTabPanel aboutQuery={aboutQuery} inputs={inputs} apiFunction={apiFunction} />;
 }
 
 export default GetFlightsByCity;

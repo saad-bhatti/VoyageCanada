@@ -1,13 +1,15 @@
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import { getFlightById } from "../../network/flight.api";
+import { toggleFlightInCart } from "../../network/user.api";
 import EndpointTabPanel from "../tab/EndpointTabPanel";
 
-/** GetFlightById component. */
-function GetFlightById() {
+/** ToggleFlightInCart component. */
+function ToggleFlightInCart() {
   /* About query section description. */
   const aboutQuery =
-    "This endpoint retrieves information about a specific flight identified by its unique ID.";
+    "This endpoint toggles a flight in the user's cart based on the provided flight ID. If the \
+    flight is already in the cart, it will be removed. If the flight is not in the cart, it will \
+    be added. Note that you must be authenticated to successfully access this endpoint.";
 
   /* Flight id state. */
   const [flightId, setFlightId] = useState("");
@@ -28,10 +30,10 @@ function GetFlightById() {
 
   /** Function to handle submission. */
   async function apiFunction() {
-    return await getFlightById(flightId);
+    return await toggleFlightInCart(flightId);
   }
 
   return <EndpointTabPanel aboutQuery={aboutQuery} inputs={inputs} apiFunction={apiFunction} />;
 }
 
-export default GetFlightById;
+export default ToggleFlightInCart;

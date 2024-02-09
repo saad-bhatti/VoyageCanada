@@ -1,8 +1,9 @@
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { getFlightsByDate } from "../../network/flight.api";
-import EndpointForm from "../form/Endpoint.Form";
+import EndpointTabPanel from "../tab/EndpointTabPanel";
 
+/** GetFlightsByDate component. */
 function GetFlightsByDate() {
   /* About query section description. */
   const aboutQuery =
@@ -27,27 +28,12 @@ function GetFlightsByDate() {
     />,
   ];
 
-  /* Query response state. */
-  const [queryResponse, setQueryResponse] = useState({ text: "", isError: false });
-
   /** Function to handle submission. */
-  async function handleSubmit() {
-    try {
-      const response = await getFlightsByDate(date);
-      setQueryResponse({ text: JSON.stringify(response, null, 2), isError: false });
-    } catch (error) {
-      setQueryResponse({ text: error.message, isError: true });
-    }
+  async function apiFunction() {
+    return await getFlightsByDate(date);
   }
 
-  return (
-    <EndpointForm
-      aboutQuery={aboutQuery}
-      inputs={inputs}
-      queryResponse={queryResponse}
-      handleSubmit={handleSubmit}
-    />
-  );
+  return <EndpointTabPanel aboutQuery={aboutQuery} inputs={inputs} apiFunction={apiFunction} />;
 }
 
 export default GetFlightsByDate;

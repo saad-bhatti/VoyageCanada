@@ -90,17 +90,18 @@ const signIn = async (args, context) => {
  * @throws {Error} If the client is not authenticated or an error occurs during the sign out.
  */
 const signOut = async (_args, context) => {
-  // Ensure the client is authenticated
-  if (!context.req.id) throw new Error("Access denied");
   try {
-    // Delete the token from the database
+    // Ensure the client is authenticated
+    await Validator.isAuthenticated(context.req.id, context.req.token);
+    
+    // Part 1: Delete the token from the database
     const token = context.req.token;
     await TokenModel.findOneAndDelete({ token: token });
 
-    // Clear the token from the response cookies
+    // Part 2: Clear the token from the response cookies
     context.res.cookie("Authorization", "", { expires: new Date(0), httpOnly: true });
 
-    // Return message upon success
+    // Part 3: Return message upon success
     return "Successfully signed out";
   } catch (err) {
     throw err; // Throw error for graphql to handle
@@ -133,7 +134,7 @@ const signUp = async (args, context) => {
 
     Validator.isValidEmail(email);
     Validator.isValidPassword(rawPassword);
-    Validator.isValidContact(contact);
+    if (contact.length) Validator.isValidContact(contact);
 
     // Part 2: Search if user with given email already exists.
     const existingUser = await UserModel.findOne({ email: email });
@@ -270,7 +271,7 @@ const changeContact = async (args, context) => {
 
     // Part 1: Sanitation & Validation of the input
     const newContact = Validator.sanitizeContent(args.newContact);
-    Validator.isValidContact(newContact);
+    if (newContact) Validator.isValidContact(newContact);
 
     // Part 2: Update the user
     const updatedUser = await UserModel.findByIdAndUpdate(
