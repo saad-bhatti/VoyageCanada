@@ -1,8 +1,9 @@
-import Credits from "../components/credits/Credits";
-import FlightEndpoints from "../components/flight/FlightEndpoints";
+import AddressPanel from "../components/panels/Address.Panel";
+import CreditsPanel from "../components/panels/Credits.Panel";
+import FlightPanel from "../components/panels/Flight.Panel";
+import TicketPanel from "../components/panels/Ticket.Panel";
+import UserPanel from "../components/panels/User.Panel";
 import CustomTab from "../components/tab/CustomTab";
-import UserEndpoints from "../components/user/UserEndpoints";
-import TicketEndpoints from "../components/ticket/TicketEndpoints";
 
 /**
  * HomePage component.
@@ -22,11 +23,11 @@ function HomePage() {
       ]}
       tabPanels={[
         "VoyageCanada frontend about",
-        <UserEndpoints />,
-        "Address endpoints",
-        <FlightEndpoints />,
-        <TicketEndpoints />,
-        <Credits />,
+        <UserPanel />,
+        <AddressPanel />,
+        <FlightPanel />,
+        <TicketPanel />,
+        <CreditsPanel />,
       ]}
       isVertical={false}
     />

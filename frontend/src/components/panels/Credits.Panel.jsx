@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
-import CreditsData from "./credits.data.js";
+import CreditsData from "../../utils/creditsData.js";
 import Stack from "@mui/material/Stack";
 
 /** Customized table components. */
@@ -33,15 +33,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 /**
- * CustomizedTables component.
- * @returns {React.ReactNode} CustomizedTables component.
+ * CreditsPanel component.
+ * @returns {React.ReactNode} CreditsPanel component.
  */
-function Credits() {
+function CreditsPanel() {
   return (
     <Stack id="CreditsPanel" spacing={2}>
       {/* Credits note. */}
       <Typography variant="subtitle1" gutterBottom>
-        Thank you to the following sources for their inspiration:
+        Thank you to the following sources for their contributions to this client application:
       </Typography>
 
       {/* Table of credits. */}
@@ -74,4 +74,4 @@ function Credits() {
   );
 }
 
-export default Credits;
+export default CreditsPanel;
