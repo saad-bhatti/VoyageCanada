@@ -23,7 +23,6 @@
     "mongoose": "^8.1.1",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.3",
-    "npm-check-updates": "^16.14.14",
     "validator": "^13.7.0"
   }
 }

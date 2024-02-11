@@ -1,6 +1,7 @@
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as FlightAPI from "../../network/flight.api";
+import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
 import EndpointTabPanel from "../tab/EndpointTabPanel";
 
 /** GetFlightById component. */
@@ -12,11 +13,17 @@ export function GetFlightById() {
   /* Flight id state. */
   const [flightId, setFlightId] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("flightId", setFlightId);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="flight-id-input"
       label="Flight Id"
+      value={flightId}
       variant="outlined"
       onChange={(event) => {
         setFlightId(event.target.value);
@@ -28,6 +35,7 @@ export function GetFlightById() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("flightId", flightId);
     return await FlightAPI.getFlightById(flightId);
   }
 
@@ -43,7 +51,14 @@ export function GetFlights() {
 
   /* Page number state. */
   const [pageNum, setPageNum] = useState(1);
+  /* Page size state. */
   const [pageSize, setPageSize] = useState(10);
+
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("pageNum", setPageNum);
+    getLocalStorage("pageSize", setPageSize);
+  }, []);
 
   /* Inputs for the query. */
   const inputs = [
@@ -75,6 +90,8 @@ export function GetFlights() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("pageNum", pageNum);
+    setLocalStorage("pageSize", pageSize);
     return await FlightAPI.getFlights(pageNum, pageSize);
   }
 
@@ -93,11 +110,18 @@ export function GetFlightsByCity() {
   /* Arrive city state. */
   const [arriveCity, setarriveCity] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("departCity", setDepartCity);
+    getLocalStorage("arriveCity", setarriveCity);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="depart-city-input"
       label="Depart City"
+      value={departCity}
       variant="outlined"
       onChange={(event) => {
         setDepartCity(event.target.value);
@@ -108,6 +132,7 @@ export function GetFlightsByCity() {
     <TextField
       id="arrive-city-input"
       label="Arrive City"
+      value={arriveCity}
       variant="outlined"
       onChange={(event) => {
         setarriveCity(event.target.value);
@@ -119,6 +144,8 @@ export function GetFlightsByCity() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("departCity", departCity);
+    setLocalStorage("arriveCity", arriveCity);
     return await FlightAPI.getFlightsByCity(departCity, arriveCity);
   }
 
@@ -135,12 +162,18 @@ export function GetFlightsByDate() {
   /* Depart city state. */
   const [date, setDate] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("date", setDate);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="date-input"
       label="Departure Date"
       placeholder="MM-DD-YYYY"
+      value={date}
       variant="outlined"
       onChange={(event) => {
         setDate(event.target.value);
@@ -152,6 +185,7 @@ export function GetFlightsByDate() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("date", date);
     return await FlightAPI.getFlightsByDate(date);
   }
 

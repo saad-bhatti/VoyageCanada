@@ -1,6 +1,7 @@
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as UserAPI from "../../network/user.api";
+import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
 import EndpointTabPanel from "../tab/EndpointTabPanel";
 
 /** GetUserProfile component. */
@@ -38,12 +39,20 @@ export function SignUp() {
   /* Contact state. */
   const [contact, setContact] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("email", setEmail);
+    getLocalStorage("name", setName);
+    getLocalStorage("contact", setContact);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="email-input"
       type="email"
       label="Email"
+      value={email}
       variant="outlined"
       onChange={(event) => {
         setEmail(event.target.value);
@@ -55,6 +64,7 @@ export function SignUp() {
       id="password-input"
       type="password"
       label="Password"
+      value={password}
       variant="outlined"
       onChange={(event) => {
         setPassword(event.target.value);
@@ -66,6 +76,7 @@ export function SignUp() {
       id="name-input"
       type="text"
       label="Name"
+      value={name}
       variant="outlined"
       onChange={(event) => {
         setName(event.target.value);
@@ -77,6 +88,7 @@ export function SignUp() {
       id="contact-input"
       type="tel"
       label="Contact Information"
+      value={contact}
       variant="outlined"
       onChange={(event) => {
         setContact(event.target.value);
@@ -87,6 +99,9 @@ export function SignUp() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("email", email);
+    setLocalStorage("name", name);
+    setLocalStorage("contact", contact);
     return await UserAPI.signUp(email, password, name, contact);
   }
 
@@ -106,12 +121,18 @@ export function SignIn() {
   /* Password state. */
   const [password, setPassword] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("email", setEmail);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="email-input"
       type="email"
       label="Email"
+      value={email}
       variant="outlined"
       onChange={(event) => {
         setEmail(event.target.value);
@@ -123,6 +144,7 @@ export function SignIn() {
       id="password-input"
       type="password"
       label="Password"
+      value={password}
       variant="outlined"
       onChange={(event) => {
         setPassword(event.target.value);
@@ -134,6 +156,7 @@ export function SignIn() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("email", email);
     return await UserAPI.signIn(email, password);
   }
 
@@ -167,12 +190,18 @@ export function ChangeEmail() {
   /* New email state. */
   const [newEmail, setNewEmail] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("email", setNewEmail);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="new-email-input"
       type="email"
       label="New Email"
+      value={newEmail}
       variant="outlined"
       onChange={(event) => {
         setNewEmail(event.target.value);
@@ -184,6 +213,7 @@ export function ChangeEmail() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("email", newEmail);
     return await UserAPI.changeEmail(newEmail);
   }
 
@@ -210,6 +240,7 @@ export function ChangePassword() {
       id="old-password-input"
       type="password"
       label="Current Password"
+      value={oldPassword}
       variant="outlined"
       onChange={(event) => {
         setOldPassword(event.target.value);
@@ -221,6 +252,7 @@ export function ChangePassword() {
       id="new-password-input"
       type="password"
       label="New Password"
+      value={newPassword}
       variant="outlined"
       onChange={(event) => {
         setNewPassword(event.target.value);
@@ -249,12 +281,18 @@ export function ChangeContact() {
   /* New contact state. */
   const [newContact, setNewContact] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("contact", setNewContact);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="new-contact-input"
       type="tel"
       label="New Contact Information"
+      value={newContact}
       variant="outlined"
       onChange={(event) => {
         setNewContact(event.target.value);
@@ -266,6 +304,7 @@ export function ChangeContact() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("contact", newContact);
     return await UserAPI.changeContact(newContact);
   }
 
@@ -283,11 +322,17 @@ export function ToggleFlightInCart() {
   /* Flight id state. */
   const [flightId, setFlightId] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("flightId", setFlightId);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="flight-id-input"
       label="Flight Id"
+      value={flightId}
       variant="outlined"
       onChange={(event) => {
         setFlightId(event.target.value);
@@ -299,6 +344,7 @@ export function ToggleFlightInCart() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("flightId", flightId);
     return await UserAPI.toggleFlightInCart(flightId);
   }
 

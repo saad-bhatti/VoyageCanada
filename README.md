@@ -2,17 +2,7 @@
 
 ## Team and Contributions
 
-- **Haowen Chang:** Development of the frontend server including:
-  - Implemented every page of the frontend
-  - Design of all visual components
-  - Development of the frontend API
-- **Saad Mohy Uddin Bhatti:** Development of the backend server including:
-  - Implementation of Graphql and Node.js
-  - Integration of MongoDB Atlas
-  - Development of frontend API
-- **Awais Aziz:**
-  - Deployment of the application
-  - Supported development of the frontend
+This project was originally developed by Haowen Chang, Saad Mohy Uddin Bhatti, and Awais Aziz at the University of Toronto but since then has been completely redone by Saad Mohy Uddin Bhatti.
 
 ## Tech stack
 
@@ -37,21 +27,22 @@ Explore our extensive range of booking options, featuring flights that precisely
 
 ## Dependencies
 
-| Frontend Dependency       | Version | Backend Dependency | Version |
-| ------------------------- | ------- | ------------------ | ------- |
-| @emotion/react            | ^11.8.2 | bcrypt             | ^5.0.1  |
-| @emotion/styled           | ^11.8.1 | body-parser        | ^1.19.2 |
-| @mui/icons-material       | ^5.5.1  | cors               | ^2.8.5  |
-| @mui/material             | ^5.5.1  | express            | ^4.17.3 |
-| @mui/utils                | ^5.4.4  | express-graphql    | ^0.12.0 |
-| prop-types                | ^15.8.1 | graphql            | ^15.8.0 |
-| react                     | ^17.0.2 | jsonwebtoken       | ^8.5.1  |
-| react-dom                 | ^17.0.2 | mongoose           | ^6.2.7  |
-| react-geocode             | ^0.2.3  | validator          | ^13.7.0 |
-| react-icons               | ^4.3.1  |                    |         |
-| react-places-autocomplete | ^7.3.0  |                    |         |
-| react-router-dom          | ^6.2.2  |                    |         |
-| react-scripts             | 5.0.0   |                    |         |
+| Frontend Dependency                | Version  | Backend Dependency | Version |
+| ---------------------------------- | -------- | ------------------ | ------- |
+| @emotion/react                     | ^11.11.3 | bcrypt             | ^5.0.1  |
+| @emotion/styled                    | ^11.11.0 | body-parser        | ^1.19.2 |
+| @fontsource/roboto                 | ^5.0.8   | cookie-parser      | ^1.4.6  |
+| @mui/icons-material                | ^5.15.8  | cors               | ^2.8.5  |
+| @mui/material                      | ^5.15.7  | dotenv             | ^16.4.1 |
+| react                              | ^18.2.0  | envalid            | ^8.0.0  |
+| react-dom                          | ^18.2.0  | express            | ^4.17.3 |
+| react-router-dom                   | ^6.22.0  | express-graphql    | ^0.12.0 |
+| react-scripts                      | ^5.0.1   | graphql            | ^15.8.0 |
+| react-secure-storage               | ^1.3.2   | jsonwebtoken       | ^8.5.1  |
+| react-swipeable-views-react-18-fix | ^0.14.1  | mongoose           | ^8.1.1  |
+|                                    |          | morgan             | ^1.10.0 |
+|                                    |          | nodemon            | ^3.0.3  |
+|                                    |          | validator          | ^13.7.0 |
 
 ## File Structure
 
@@ -76,15 +67,18 @@ Explore our extensive range of booking options, featuring flights that precisely
 - **`public/`** - Contains the public files for the frontend
 - **`src/`** - Contains the source files
 
-  - **`components/`** - Contains the all components
-  - **`pages/`** - Contains the pages
-  - **`style/`** - Contains the styles
-  - **`api.js`** - Contains the API to communicate with the backend
+  - **`components/`** - Contains the code of all components
+  - **`images/`** - Contains the images seen throughout the application
+  - **`network/`** - Contains the code for communicating with the backend
+  - **`pages/`** - Contains the pages accessible in the application
+  - **`utils/`** - Contains the utility functions
   - **`App.js`** - Initializes the react frontend application
   - **`index.js`** - Renders the react app by rendering App.js
 
+- **`.env`** - Contains the environment variables
 - **`Dockerfile`** - Commands for building a docker image
 - **`package.json`** - Defines npm behaviors and packages
+- **`webpack.config.js`** - Contains the configuration for webpack
 
 **`nginx/`** - Contains the nginx configuration file
 

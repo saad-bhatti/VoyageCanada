@@ -1,6 +1,7 @@
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getTicketById, purchaseTicket } from "../../network/ticket.api";
+import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
 import EndpointTabPanel from "../tab/EndpointTabPanel";
 
 /** GetTicketById component. */
@@ -14,11 +15,17 @@ export function GetTicketById() {
   /* Ticket id state. */
   const [ticketId, setTicketId] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("ticketId", setTicketId);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="ticket-id-input"
       label="Ticket Id"
+      value={ticketId}
       variant="outlined"
       onChange={(event) => {
         setTicketId(event.target.value);
@@ -30,6 +37,7 @@ export function GetTicketById() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("ticketId", ticketId);
     return await getTicketById(ticketId);
   }
 
@@ -46,11 +54,17 @@ export function PurchaseTicket() {
   /* Flight id state. */
   const [flightId, setFlightId] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("flightId", setFlightId);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="flight-id-input"
       label="Flight Id"
+      value={flightId}
       variant="outlined"
       onChange={(event) => {
         setFlightId(event.target.value);
@@ -62,6 +76,7 @@ export function PurchaseTicket() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("flightId", flightId);
     return await purchaseTicket(flightId);
   }
 

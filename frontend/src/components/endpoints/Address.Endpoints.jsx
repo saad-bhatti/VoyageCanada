@@ -1,6 +1,7 @@
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as AddressAPI from "../../network/address.api";
+import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
 import EndpointTabPanel from "../tab/EndpointTabPanel";
 
 /** GetAddressById component. */
@@ -14,11 +15,17 @@ export function GetAddressById() {
   /* Ticket id state. */
   const [addressId, setAddressId] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("addressId", setAddressId);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="address-id-input"
       label="Address Id"
+      value={addressId}
       variant="outlined"
       onChange={(event) => {
         setAddressId(event.target.value);
@@ -30,6 +37,7 @@ export function GetAddressById() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("addressId", addressId);
     return await AddressAPI.getAddressById(addressId);
   }
 
@@ -53,11 +61,20 @@ export function CreateAddress() {
   /* Postal code state. */
   const [postalCode, setPostalCode] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("street", setStreet);
+    getLocalStorage("city", setCity);
+    getLocalStorage("province", setProvince);
+    getLocalStorage("postalCode", setPostalCode);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="street-input"
       label="Street"
+      value={street}
       variant="outlined"
       onChange={(event) => {
         setStreet(event.target.value);
@@ -68,6 +85,7 @@ export function CreateAddress() {
     <TextField
       id="city-input"
       label="City"
+      value={city}
       variant="outlined"
       onChange={(event) => {
         setCity(event.target.value);
@@ -78,6 +96,7 @@ export function CreateAddress() {
     <TextField
       id="province-input"
       label="Province"
+      value={province}
       placeholder="e.g. ON, BC, QC, etc."
       variant="outlined"
       onChange={(event) => {
@@ -89,6 +108,7 @@ export function CreateAddress() {
     <TextField
       id="postal-code-input"
       label="Postal Code"
+      value={postalCode}
       variant="outlined"
       onChange={(event) => {
         setPostalCode(event.target.value);
@@ -100,6 +120,10 @@ export function CreateAddress() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("street", street);
+    setLocalStorage("city", city);
+    setLocalStorage("province", province);
+    setLocalStorage("postalCode", postalCode);
     return await AddressAPI.createAddress(street, city, province, postalCode);
   }
 
@@ -125,11 +149,21 @@ export function UpdateAddress() {
   /* Postal code state. */
   const [newPostalCode, setNewPostalCode] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("addressId", setAddressId);
+    getLocalStorage("street", setNewStreet);
+    getLocalStorage("city", setNewCity);
+    getLocalStorage("province", setNewProvince);
+    getLocalStorage("postalCode", setNewPostalCode);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="address-id-input"
       label="Address Id"
+      value={addressId}
       variant="outlined"
       onChange={(event) => {
         setAddressId(event.target.value);
@@ -140,6 +174,7 @@ export function UpdateAddress() {
     <TextField
       id="street-input"
       label="Street"
+      value={newStreet}
       variant="outlined"
       onChange={(event) => {
         setNewStreet(event.target.value);
@@ -150,6 +185,7 @@ export function UpdateAddress() {
     <TextField
       id="city-input"
       label="City"
+      value={newCity}
       variant="outlined"
       onChange={(event) => {
         setNewCity(event.target.value);
@@ -160,6 +196,7 @@ export function UpdateAddress() {
     <TextField
       id="province-input"
       label="Province"
+      value={newProvince}
       placeholder="e.g. ON, BC, QC, etc."
       variant="outlined"
       onChange={(event) => {
@@ -171,6 +208,7 @@ export function UpdateAddress() {
     <TextField
       id="postal-code-input"
       label="Postal Code"
+      value={newPostalCode}
       variant="outlined"
       onChange={(event) => {
         setNewPostalCode(event.target.value);
@@ -182,6 +220,11 @@ export function UpdateAddress() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("addressId", addressId);
+    setLocalStorage("street", newStreet);
+    setLocalStorage("city", newCity);
+    setLocalStorage("province", newProvince);
+    setLocalStorage("postalCode", newPostalCode);
     return await AddressAPI.updateAddress(
       addressId,
       newStreet,
@@ -205,11 +248,17 @@ export function DeleteAddress() {
   /* Ticket id state. */
   const [addressId, setAddressId] = useState("");
 
+  /* State initialization from local storage. */
+  useEffect(() => {
+    getLocalStorage("addressId", setAddressId);
+  }, []);
+
   /* Inputs for the query. */
   const inputs = [
     <TextField
       id="address-id-input"
       label="Address Id"
+      value={addressId}
       variant="outlined"
       onChange={(event) => {
         setAddressId(event.target.value);
@@ -221,6 +270,7 @@ export function DeleteAddress() {
 
   /** Function to handle submission. */
   async function apiFunction() {
+    setLocalStorage("addressId", addressId);
     return await AddressAPI.deleteAddress(addressId);
   }
 
