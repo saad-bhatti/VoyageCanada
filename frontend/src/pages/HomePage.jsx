@@ -1,6 +1,7 @@
 import AddressPanel from "../components/panels/Address.Panel";
 import CreditsPanel from "../components/panels/Credits.Panel";
 import FlightPanel from "../components/panels/Flight.Panel";
+import HomePanel from "../components/panels/Home.Panel";
 import TicketPanel from "../components/panels/Ticket.Panel";
 import UserPanel from "../components/panels/User.Panel";
 import CustomTab from "../components/tab/CustomTab";
@@ -14,7 +15,7 @@ function HomePage() {
     <CustomTab
       id="HomePage"
       tabs={[
-        "VoyageCanada",
+        "Home",
         "User Endpoints",
         "Address Endpoints",
         "Flight Endpoints",
@@ -22,7 +23,7 @@ function HomePage() {
         "Credits",
       ]}
       tabPanels={[
-        "VoyageCanada frontend about",
+        <HomePanel />,
         <UserPanel />,
         <AddressPanel />,
         <FlightPanel />,

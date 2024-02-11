@@ -30,9 +30,9 @@ function EndpointForm(props) {
   const { aboutQuery, inputs, queryResponse, handleSubmit, ...other } = props;
 
   return (
-    <Grid container gap={4} {...other}>
+    <Grid container gap={4} mx="5%" {...other}>
       {/* About query section. */}
-      <Grid id="about-section" xs={12} bgcolor="#161b22" borderRadius="5%" pl={2} py={2}>
+      <Grid id="about-section" xs={12} bgcolor="#161b22" borderRadius="5%" px={2} py={2}>
         <Stack gap={2} direction="column">
           {/* About query section title. */}
           <Typography variant="h6" fontWeight="bold">
@@ -45,7 +45,7 @@ function EndpointForm(props) {
       </Grid>
 
       {/* Query input section. */}
-      <Grid id="query-section" xs={12} bgcolor="#161b22" borderRadius="5%" pl={2} py={2}>
+      <Grid id="query-section" xs={12} bgcolor="#161b22" borderRadius="5%" px={2} py={2}>
         <Stack gap={2} direction="column">
           {/* Query input section title. */}
           <Typography variant="h6" fontWeight="bold">
@@ -53,7 +53,11 @@ function EndpointForm(props) {
           </Typography>
 
           {/* Inputs. */}
-          {inputs}
+          {inputs.map((input, index) => (
+            <div key={index} className="input-wrapper">
+              {input}
+            </div>
+          ))}
 
           {/* Submit button. */}
           <Button
@@ -63,7 +67,7 @@ function EndpointForm(props) {
               event.preventDefault();
               handleSubmit();
             }}
-            sx={{ width: "fit-content", alignSelf: "flex-end", mr: 2 }}
+            sx={{ width: "fit-content", alignSelf: "flex-end" }}
           >
             Send Query
           </Button>
@@ -71,7 +75,7 @@ function EndpointForm(props) {
       </Grid>
 
       {/* Query response section. */}
-      <Grid id="response-section" xs={12} bgcolor="#161b22" borderRadius="5%" pl={2} py={2}>
+      <Grid id="response-section" xs={12} bgcolor="#161b22" borderRadius="5%" px={2} py={2}>
         <Stack gap={2} direction="column">
           {/* Query response section title. */}
           <Typography variant="h6" fontWeight="bold">
