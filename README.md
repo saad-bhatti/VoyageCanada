@@ -2,7 +2,23 @@
 
 ## Team and Contributions
 
-This project was originally developed by Haowen Chang, Saad Mohy Uddin Bhatti, and Awais Aziz at the University of Toronto but since then has been completely redone by Saad Mohy Uddin Bhatti.
+### Version 1.0
+
+- **Haowen Chang:** Development of the frontend server including:
+  - Implemented every page of the frontend
+  - Design of all visual components
+  - Development of the frontend API
+- **Saad Mohy Uddin Bhatti:** Development of the backend server including:
+  - Implementation of Graphql and Node.js
+  - Integration of MongoDB Atlas
+  - Development of frontend API
+- **Awais Aziz:**
+  - Deployment of the application
+  - Supported development of the frontend
+
+### Version 2.0
+
+The project has been maintained and updated by Saad Mohy Uddin Bhatti, along with a complete overhaul of the frontend and backend.
 
 ## Tech stack
 
@@ -20,6 +36,32 @@ In addition, experience the vastness of Canada through our inter-provinces trave
 <br />
 <br />
 Explore our extensive range of booking options, featuring flights that precisely match your preferences, from departure city to pricing and beyond. Our commitment to excellence ensures that every aspect of your travel is carefully considered, allowing you to focus on the excitement of your upcoming adventure. Join us at VoyageCanada, where professionalism meets passion, and embark on a journey that transcends the ordinary!
+
+## Usage
+
+### Prerequisites for Locally Running Edopla
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- .env files (provided on request)
+
+### Running the application
+
+1. Clone the repository
+2. Navigate to the root directory of the repository
+3. Run `docker-compose up -d` to start the application
+4. Open a browser and navigate to `localhost:3000`
+
+_The frontend will be running on `localhost:3000`_
+<br />
+_The backend will be running on `localhost:4000/graphql`_
+
+### Stopping the application
+
+Given the application is running:
+
+1. Navigate to the root directory of the repository
+2. Run `docker compose down` to stop the application
 
 ## Dependencies
 
