@@ -39,7 +39,10 @@ Explore our extensive range of booking options, featuring flights that precisely
 
 ## Usage
 
-### Prerequisites for Locally Running Edopla
+- This application can be accessed at: [VoyageCanada](https://voyagecanada.onrender.com/)
+- Preferred devices: Laptop or tablet (mobile support coming soon) 
+
+### Prerequisites for Locally Running VoyageCanada
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
@@ -61,7 +64,7 @@ _The backend will be running on `localhost:4000/graphql`_
 Given the application is running:
 
 1. Navigate to the root directory of the repository
-2. Run `docker compose down` to stop the application
+2. Run `docker-compose down` to stop the application
 
 ## Dependencies
 
