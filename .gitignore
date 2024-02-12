@@ -4,10 +4,13 @@ Thumbs.db
 
 # Dependencies
 node_modules
-*.json
+*-lock.json
 
 # jshint config file
 /.jshintrc
 
 #IDE config
 .idea
+
+# Environment variables
+.env
