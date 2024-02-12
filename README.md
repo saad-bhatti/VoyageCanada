@@ -21,10 +21,6 @@ In addition, experience the vastness of Canada through our inter-provinces trave
 <br />
 Explore our extensive range of booking options, featuring flights that precisely match your preferences, from departure city to pricing and beyond. Our commitment to excellence ensures that every aspect of your travel is carefully considered, allowing you to focus on the excitement of your upcoming adventure. Join us at VoyageCanada, where professionalism meets passion, and embark on a journey that transcends the ordinary!
 
-## Usage
-
-## Features
-
 ## Dependencies
 
 | Frontend Dependency                | Version  | Backend Dependency | Version |
@@ -79,11 +75,6 @@ Explore our extensive range of booking options, featuring flights that precisely
 - **`Dockerfile`** - Commands for building a docker image
 - **`package.json`** - Defines npm behaviors and packages
 - **`webpack.config.js`** - Contains the configuration for webpack
-
-**`nginx/`** - Contains the nginx configuration file
-
-- **`default.conf`** - Contains the configuration for the nginx server
-- **`Dockerfile`** - Commands for building a docker image for the nginx server
 
 **`docker-compose.yml`** - Contains the docker-compose file for the application
 
