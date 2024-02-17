@@ -1,6 +1,12 @@
-# VoyageCanada
+<p align="center">
+  <img alt="Edopla Logo" src="frontend/public/logo.png" width="200" height="200" />
+</p>
 
 ## Team and Contributions
+
+### Version 2.0
+
+The project has been maintained and updated by Saad Mohy Uddin Bhatti, along with a complete overhaul of the frontend and backend.
 
 ### Version 1.0
 
@@ -16,15 +22,13 @@
   - Deployment of the application
   - Supported development of the frontend
 
-### Version 2.0
-
-The project has been maintained and updated by Saad Mohy Uddin Bhatti, along with a complete overhaul of the frontend and backend.
-
 ## Tech stack
 
+- JavaScript
 - React
-- GraphQL
 - Node.js
+- Express
+- GraphQL
 - MongoDB Atlas
 
 ## About VoyageCanada
@@ -39,7 +43,10 @@ Explore our extensive range of booking options, featuring flights that precisely
 
 ## Usage
 
-### Prerequisites for Locally Running Edopla
+- This application can be accessed at: [VoyageCanada](https://voyagecanada.onrender.com/)
+- Preferred devices: Laptop or tablet (mobile support coming soon) 
+
+### Prerequisites for Locally Running VoyageCanada
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
@@ -54,14 +61,14 @@ Explore our extensive range of booking options, featuring flights that precisely
 
 _The frontend will be running on `localhost:3000`_
 <br />
-_The backend will be running on `localhost:4000/graphql`_
+_The backend will be accessible on `localhost:4000/graphql`_
 
 ### Stopping the application
 
 Given the application is running:
 
 1. Navigate to the root directory of the repository
-2. Run `docker compose down` to stop the application
+2. Run `docker-compose down` to stop the application
 
 ## Dependencies
 
